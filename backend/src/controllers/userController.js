@@ -36,7 +36,6 @@ exports.registerUser = async (req, res) => {
 exports.loginUser = async (req, res) => {
     try {
 
-        // Destructure user input
         const { email, password } = req.body;
         if(!email) {
             return res.status(400).json({message: 'Please, provide email'})
@@ -46,19 +45,16 @@ exports.loginUser = async (req, res) => {
             return res.status(400).json({message: 'Please, type password'})
         }
 
-        // Check if user exists
         const user = await User.findOne({ where: { email } });
         if (!user) {
             return res.status(400).json({ message: 'User with this email does not exists' });
         }
 
-        // Check if password is correct
         const isPasswordMatch = await bcrypt.compare(password, user.password);
         if (!isPasswordMatch) {
             return res.status(400).json({ message: 'Wrong password' });
         }
 
-        // Generate JWT token
         const payload = {
             user: {
                 id: user.id,

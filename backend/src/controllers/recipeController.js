@@ -3,9 +3,9 @@ const Recipe = require('../database/models/recipe');
 
 exports.createRecipe = async (req, res) => {
     try {
-        const { title, description, /* Add other recipe properties */ } = req.body;
+        const { title, description } = req.body;
 
-        const newRecipe = await Recipe.create({ title, description, /* Add other recipe properties */ });
+        const newRecipe = await Recipe.create({ title, description });
 
         res.status(201).json(newRecipe);
     } catch (error) {
