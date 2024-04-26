@@ -1,4 +1,5 @@
 const express = require('express');
+const cors = require("cors");
 const bodyParser = require('body-parser');
 const {sequelize} = require('./src/database/db');
 const userRoute = require('./src/routes/userRoute');
@@ -6,7 +7,12 @@ const recipeRoute = require('./src/routes/recipeRoute');
 const shoppingListRoute = require('./src/routes/shoppingListRoute');
 
 
+
+
 const app = express();
+
+app.use(cors());
+app.use(express.json());
 
 app.use(bodyParser.json());
 
@@ -19,7 +25,7 @@ app.use((err, req, res, next) => {
     res.status(500).send('Something broke!');
 });
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 8000;
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
 });

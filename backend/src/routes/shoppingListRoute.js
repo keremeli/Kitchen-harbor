@@ -3,7 +3,9 @@ const express = require('express');
 const router = express.Router();
 const shoppingListController = require('../controllers/shoppingListController');
 
-router.post('/', shoppingListController.createShoppingList);
+router.get('/', shoppingListController.getAllShoppingLists);
+
+router.post('/createnew', shoppingListController.createShoppingList);
 
 router.get('/:shoppingListId', shoppingListController.getShoppingListById);
 

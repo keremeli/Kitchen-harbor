@@ -1,11 +1,25 @@
 
 const Recipe = require('../database/models/recipe');
 
+// Controller function to get all recipes
+exports.getAllRecipes = async (req, res) => {
+  try {
+    // Fetch all recipes from the database
+    const recipes = await Recipe.findAll();
+    // Send the recipes as a response
+    res.json(recipes);
+  } catch (error) {
+    // If there's an error, send a 500 status code along with the error message
+    res.status(500).json({ error: error.message });
+  }
+};
+
+
 exports.createRecipe = async (req, res) => {
     try {
-        const { title, description } = req.body;
+        const { title, ingredients, description } = req.body; // Destructure ingredients from the request body
 
-        const newRecipe = await Recipe.create({ title, description });
+        const newRecipe = await Recipe.create({ title, description, ingredients }); // Pass ingredients to the create method
 
         res.status(201).json(newRecipe);
     } catch (error) {
@@ -13,6 +27,7 @@ exports.createRecipe = async (req, res) => {
         res.status(500).json({ message: 'Server error' });
     }
 };
+
 
 exports.getRecipeById = async (req, res) => {
     try {

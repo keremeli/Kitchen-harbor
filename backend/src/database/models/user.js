@@ -1,4 +1,4 @@
-
+// models/user.js
 const { DataTypes } = require('sequelize');
 const { sequelize } = require('../db');
 
@@ -25,6 +25,8 @@ const User = sequelize.define('User', {
         type: DataTypes.STRING,
         allowNull: false,
     },
+}, {
+    timestamps: false, // Disable timestamps
 });
 
 module.exports = User;

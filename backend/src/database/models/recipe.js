@@ -15,11 +15,18 @@ const Recipe = sequelize.define(
             type: DataTypes.STRING,
             allowNull: false,
         },
+        ingredients: {
+            type: DataTypes.ARRAY(DataTypes.STRING),
+            allowNull: true,
+        },
         description: {
             type: DataTypes.TEXT,
             allowNull: true,
         },
     },
+    {
+        timestamps: false, // Disable timestamps
+    }
 
 );
 

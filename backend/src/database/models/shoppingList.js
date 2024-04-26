@@ -10,25 +10,24 @@ const ShoppingList = sequelize.define(
             primaryKey: true,
             autoIncrement: true,
             allowNull: false,
-        },
-        name: {
+          },
+          title: {
             type: DataTypes.STRING,
             allowNull: false,
-        },
-        user_id: {
-            type: DataTypes.INTEGER,
-            allowNull: false,
-            references: {
-                model: 'users',
-                key: 'id',
-            },
-        },
-        completed: {
+          },
+          ingredients: {
+            type: DataTypes.ARRAY(DataTypes.STRING),
+            allowNull: true
+          },
+          completed: {
             type: DataTypes.BOOLEAN,
             allowNull: false,
             defaultValue: false,
-        },
-    },
+          },
+    }, 
+    {
+        timestamps: false, // Disable timestamps
+    }
 
 );
 
